@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 import {
   PINK_PRIMARY,
   PINK_ALT,
@@ -20,8 +21,8 @@ class Home extends Component {
           </Text>
         </Hero>
         <Action>
-          <a>注册</a>
-          <a>登录</a>
+          <Link to="/signup">注册</Link>
+          <Link to="/signup">登录</Link>
         </Action>
       </Wrap>
     )
