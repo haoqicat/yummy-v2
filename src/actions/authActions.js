@@ -24,6 +24,8 @@ export const fetchCurrentUser = () => dispatch => {
 }
 
 export const signup = data => dispatch => {
+  dispatch({ type: types.SIGNUP_REQUEST })
+
   axios
     .post(SIGNUP_URL, data)
     .then(res => {
@@ -33,6 +35,7 @@ export const signup = data => dispatch => {
     })
     .catch(err => {
       if (err.response) {
+        dispatch({ type: types.SIGNUP_FAILURE })
         const { msg } = err.response.data
         console.log(msg)
         dispatch(alert(msg))
@@ -46,6 +49,7 @@ const clearReferrer = () => ({
 
 export const login = data => {
   return (dispatch, getState) => {
+    dispatch({ type: types.LOGIN_REQUEST })
     axios
       .post(LOGIN_URL, data)
       .then(res => {
@@ -58,6 +62,7 @@ export const login = data => {
       })
       .catch(err => {
         if (err.response) {
+          dispatch({ type: types.LOGIN_FAILURE })
           const { msg } = err.response.data
           console.log(msg)
           dispatch(alert(msg))

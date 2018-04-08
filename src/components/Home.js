@@ -22,7 +22,7 @@ class Home extends Component {
         </Hero>
         <Action>
           <Link to="/signup">注册</Link>
-          <Link to="/signup">登录</Link>
+          <Link to="/login">登录</Link>
         </Action>
       </Wrap>
     )
