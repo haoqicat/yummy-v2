@@ -2,19 +2,34 @@ import React, { Component } from 'react'
 import { slide as Menu } from 'react-burger-menu'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import UserInfo from './SidebarUserInfo'
 
 class Sidebar extends Component {
+  state = {
+    isOpen: false
+  }
+
+  closeMenu = () => {
+    this.setState({
+      isOpen: false
+    })
+  }
   render() {
+    const { isOpen } = this.state
+
     return (
       <Wrap>
-        <Menu customCrossIcon={false}>
+        <Menu customCrossIcon={false} isOpen={isOpen}>
+          <UserInfo />
           <div className="bm-link-list">
             <Link to="/">首页</Link>
             <Link to="/profile">个人中心</Link>
             <Link to="/dishes">猜你喜欢</Link>
           </div>
           <div className="bottom-button">
-            <button className="bm-close-button">关闭</button>
+            <button onClick={this.closeMenu} className="bm-close-button">
+              关闭
+            </button>
           </div>
         </Menu>
       </Wrap>
