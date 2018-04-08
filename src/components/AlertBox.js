@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 
 class AlertBox extends Component {
+  componentDidMount() {
+    window.setTimeout(this.props.hideAlert, 4000)
+  }
   render() {
     return <Wrap>{this.props.alertMsg}</Wrap>
   }

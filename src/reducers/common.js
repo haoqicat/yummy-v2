@@ -14,6 +14,8 @@ const alert = (state = { isShown: false, msg: '' }, action) => {
   switch (action.type) {
     case types.ALERT:
       return { isShown: true, msg: action.msg }
+    case types.HIDE_ALERT:
+      return { show: false, msg: '' }
     default:
       return state
   }

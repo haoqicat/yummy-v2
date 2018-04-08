@@ -8,3 +8,7 @@ export const alert = msg => ({
   type: types.ALERT,
   msg
 })
+
+export const hideAlert = () => dispatch => {
+  dispatch({ type: types.HIDE_ALERT })
+}
