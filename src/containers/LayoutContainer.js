@@ -1,6 +1,12 @@
 import React from 'react'
 import Layout from '../components/Layout'
+import { getTitle } from '../selectors'
+import { connect } from 'react-redux'
 
 const LayoutContainer = props => <Layout {...props} />
 
-export default LayoutContainer
+const mapStateToProps = state => ({
+  title: getTitle(state)
+})
+
+export default connect(mapStateToProps)(LayoutContainer)
