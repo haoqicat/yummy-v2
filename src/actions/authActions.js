@@ -37,3 +37,8 @@ export const login = data => {
       })
   }
 }
+
+export const logout = () => {
+  history.push('/')
+  return dispatch => dispatch({ type: types.LOGOUT })
+}

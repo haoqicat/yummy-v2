@@ -6,6 +6,8 @@ const isAuthenticated = (state = false, action) => {
     case types.LOGIN_SUCCESS:
     case types.SIGNUP_SUCCESS:
       return true
+    case types.LOGOUT:
+      return false
     default:
       return state
   }
