@@ -1,14 +1,33 @@
 import axios from 'axios'
-import { SIGNUP_URL, LOGIN_URL } from '../constants/ApiConstants'
+import {
+  SIGNUP_URL,
+  LOGIN_URL,
+  USER_BY_ID_URL
+} from '../constants/ApiConstants'
 import { history } from '../utils/routerUtils'
 import { alert } from './index'
 import * as types from '../constants/ActionTypes'
+
+const receiveCurrentUser = user => ({
+  type: types.RECEIVE_CURRENT_USER,
+  user
+})
+
+export const fetchCurrentUser = () => dispatch => {
+  const id = window.localStorage.getItem('userId')
+  if (id) {
+    axios.get(USER_BY_ID_URL.replace(':id', id)).then(res => {
+      dispatch(receiveCurrentUser(res.data.user))
+    })
+  }
+}
 
 export const signup = data => dispatch => {
   axios
     .post(SIGNUP_URL, data)
     .then(res => {
       dispatch({ type: types.SIGNUP_SUCCESS, user: res.data.user })
+      window.localStorage.setItem('userId', res.data.user._id)
       history.push('/dashboard')
     })
     .catch(err => {
@@ -26,6 +45,7 @@ export const login = data => {
       .post(LOGIN_URL, data)
       .then(res => {
         dispatch({ type: types.LOGIN_SUCCESS, user: res.data.user })
+        window.localStorage.setItem('userId', res.data.user._id)
         history.push('/dashboard')
       })
       .catch(err => {
