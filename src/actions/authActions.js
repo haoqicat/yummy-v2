@@ -7,6 +7,7 @@ import {
 import { history } from '../utils/routerUtils'
 import { alert } from './index'
 import * as types from '../constants/ActionTypes'
+import { getReferrer } from '../selectors'
 
 const receiveCurrentUser = user => ({
   type: types.RECEIVE_CURRENT_USER,
@@ -39,14 +40,21 @@ export const signup = data => dispatch => {
     })
 }
 
+const clearReferrer = () => ({
+  type: types.CLEAR_REFERRER
+})
+
 export const login = data => {
-  return dispatch => {
+  return (dispatch, getState) => {
     axios
       .post(LOGIN_URL, data)
       .then(res => {
         dispatch({ type: types.LOGIN_SUCCESS, user: res.data.user })
         window.localStorage.setItem('userId', res.data.user._id)
-        history.push('/dashboard')
+        const referer = getReferrer(getState())
+        dispatch(clearReferrer())
+        const redirectTo = referer || '/dashboard'
+        history.push(redirectTo)
       })
       .catch(err => {
         if (err.response) {
