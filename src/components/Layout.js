@@ -5,11 +5,13 @@ import LoginContainer from '../containers/LoginContainer'
 import styled from 'styled-components'
 import { PINK_PRIMARY, PINK_ALT, TEXT_PRIMARY } from '../constants/Colors'
 import AlertBoxContainer from '../containers/AlertBoxContainer'
+import Sidebar from '../containers/SidebarContainer'
 
 class Layout extends Component {
   render() {
     return (
       <Wrap>
+        <Sidebar />
         {this.props.isAlertShown && <AlertBoxContainer />}
         <Header>{this.props.title}</Header>
         <Content>
