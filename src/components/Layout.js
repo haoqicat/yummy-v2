@@ -6,9 +6,12 @@ import styled from 'styled-components'
 import { PINK_PRIMARY, PINK_ALT, TEXT_PRIMARY } from '../constants/Colors'
 import AlertBoxContainer from '../containers/AlertBoxContainer'
 import Sidebar from '../containers/SidebarContainer'
+import SettingsContainer from '../containers/SettingsContainer'
+import { PrivateRoute } from '../utils/routerUtils'
 
 class Layout extends Component {
   render() {
+    const { isAuthenticated } = this.props
     return (
       <Wrap>
         <Sidebar />
@@ -19,6 +22,11 @@ class Layout extends Component {
             <Switch>
               <Route path="/signup" component={SignupContainer} />
               <Route path="/login" component={LoginContainer} />
+              <PrivateRoute
+                isAuthenticated={isAuthenticated}
+                path="/settings"
+                component={SettingsContainer}
+              />
             </Switch>
           </Inner>
         </Content>
